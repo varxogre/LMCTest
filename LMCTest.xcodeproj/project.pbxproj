@@ -13,6 +13,10 @@
 		8791F46125C84920006099D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8791F45F25C84920006099D2 /* Main.storyboard */; };
 		8791F46325C84922006099D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8791F46225C84922006099D2 /* Assets.xcassets */; };
 		8791F46625C84922006099D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8791F46425C84922006099D2 /* LaunchScreen.storyboard */; };
+		8791F47025C880ED006099D2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F46F25C880ED006099D2 /* NetworkService.swift */; };
+		8791F47525C89762006099D2 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F47425C89762006099D2 /* APIConstants.swift */; };
+		8791F47B25C8AF98006099D2 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F47A25C8AF98006099D2 /* ReviewManager.swift */; };
+		8791F48425C8D313006099D2 /* CriticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F48325C8D313006099D2 /* CriticManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		8791F46225C84922006099D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8791F46525C84922006099D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8791F46725C84922006099D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8791F46F25C880ED006099D2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		8791F47425C89762006099D2 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		8791F47A25C8AF98006099D2 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		8791F48325C8D313006099D2 /* CriticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +71,20 @@
 				8791F46225C84922006099D2 /* Assets.xcassets */,
 				8791F46425C84922006099D2 /* LaunchScreen.storyboard */,
 				8791F46725C84922006099D2 /* Info.plist */,
+				8791F47225C880F2006099D2 /* Network */,
+				8791F47425C89762006099D2 /* APIConstants.swift */,
 			);
 			path = LMCTest;
+			sourceTree = "<group>";
+		};
+		8791F47225C880F2006099D2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8791F46F25C880ED006099D2 /* NetworkService.swift */,
+				8791F47A25C8AF98006099D2 /* ReviewManager.swift */,
+				8791F48325C8D313006099D2 /* CriticManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +158,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8791F45E25C84920006099D2 /* ViewController.swift in Sources */,
+				8791F47525C89762006099D2 /* APIConstants.swift in Sources */,
 				8791F45A25C84920006099D2 /* AppDelegate.swift in Sources */,
+				8791F47025C880ED006099D2 /* NetworkService.swift in Sources */,
+				8791F48425C8D313006099D2 /* CriticManager.swift in Sources */,
 				8791F45C25C84920006099D2 /* SceneDelegate.swift in Sources */,
+				8791F47B25C8AF98006099D2 /* ReviewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +312,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LMCTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,6 +331,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LMCTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
