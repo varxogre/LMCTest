@@ -197,7 +197,7 @@
                                             <constraint firstAttribute="trailing" secondItem="8Sa-Um-rUG" secondAttribute="trailing" constant="16" id="ssK-as-1uz"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mwA-9n-nCX">
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mwA-9n-nCX">
                                         <rect key="frame" x="0.0" y="133" width="414" height="104.33333333333331"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Ju0-4t-Kos">
@@ -210,16 +210,28 @@
                                                     <string>Title</string>
                                                 </scopeButtonTitles>
                                             </searchBar>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htz-YL-jTn">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HOP-oc-XMI">
                                                 <rect key="frame" x="0.0" y="56.333333333333343" width="414" height="48"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <connections>
-                                                    <action selector="dateButtonTapped:" destination="qgL-dk-snH" eventType="touchUpInside" id="yF3-yA-gsr"/>
-                                                </connections>
-                                            </button>
+                                                <subviews>
+                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-Sj-Nyq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                                                        <locale key="locale" localeIdentifier="en_US"/>
+                                                        <connections>
+                                                            <action selector="dateChanged:" destination="qgL-dk-snH" eventType="valueChanged" id="H8X-zQ-V5K"/>
+                                                        </connections>
+                                                    </datePicker>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="eEg-Sj-Nyq" firstAttribute="top" secondItem="HOP-oc-XMI" secondAttribute="top" id="0Nv-hv-Rbg"/>
+                                                    <constraint firstItem="eEg-Sj-Nyq" firstAttribute="leading" secondItem="HOP-oc-XMI" secondAttribute="leading" id="0ul-AJ-b0n"/>
+                                                    <constraint firstAttribute="bottom" secondItem="eEg-Sj-Nyq" secondAttribute="bottom" id="ZO4-16-07L"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eEg-Sj-Nyq" secondAttribute="trailing" id="yGn-9o-dmY"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="htz-YL-jTn" firstAttribute="height" secondItem="Ju0-4t-Kos" secondAttribute="height" id="sfI-Fz-6ha"/>
+                                            <constraint firstItem="HOP-oc-XMI" firstAttribute="height" secondItem="Ju0-4t-Kos" secondAttribute="height" id="NeK-PD-Hq4"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -262,7 +274,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="7e9-Wd-tOs"/>
                     <connections>
-                        <outlet property="dateButton" destination="htz-YL-jTn" id="4Cz-ss-nCz"/>
+                        <outlet property="datePicker" destination="eEg-Sj-Nyq" id="xAx-Rg-mC2"/>
                         <outlet property="searchBar" destination="Ju0-4t-Kos" id="6O9-22-CMY"/>
                         <outlet property="tableView" destination="qGr-iG-m84" id="se3-kz-0gq"/>
                     </connections>
@@ -300,6 +312,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

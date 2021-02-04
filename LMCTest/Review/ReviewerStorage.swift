@@ -11,7 +11,6 @@ protocol ReviewsStorageUpdateProtocol: class {
     func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath]
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
     func onFetchFailed(with reason: String)
-    func updateTable()
 }
 
 
@@ -24,21 +23,9 @@ class ReviewsStorage {
     var searchingOffset = 0
     var hasMore = false
     var isSearching = false
-    var query: String? {
-        didSet {
-            print(query)
-        }
-    }
-    var reviews: [Review] = [] {
-        didSet {
-            print("reviews count: \(reviews.count)")
-        }
-    }
-    var searchedReviews: [Review] = [] {
-        didSet {
-            print("searchingReviews count: \(searchedReviews.count)")
-        }
-    }
+    var query: String?
+    var reviews: [Review] = [] 
+    var searchedReviews: [Review] = []
     
     func fetchReviews() {
         ReviewManager.getReviewsByOffset(offset: offset) { [weak self] (result) in

@@ -18,3 +18,13 @@ extension String {
         return self
     }
 }
+
+extension Date {
+    func customizeDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+        
+        return self
+    }
+}
