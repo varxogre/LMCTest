@@ -23,9 +23,9 @@ struct ReviewManager {
         }
     }
     
-    static func getReviewsBySearch(with query: String, completion: @escaping (Result<ReviewInfo, Error>) -> Void) {
+    static func getReviewsBySearch(with query: String, offset: Int, completion: @escaping (Result<ReviewInfo, Error>) -> Void) {
         NetworkService.shared.performRequestByURL(
-            url: APIConstants.reviewsQuery + "&query=" + query) {
+            url: APIConstants.reviewsQuery + "&query=" + query + "&offset=" + String(offset)) {
             switch $0 {
             case .failure(let error):
                 completion(.failure(error))
@@ -44,7 +44,7 @@ struct ReviewInfo: Codable {
     let status, copyright: String
     let hasMore: Bool
     let numResults: Int
-    let results: [MovieModel]
+    let results: [Review]
 
     enum CodingKeys: String, CodingKey {
         case status, copyright
@@ -55,7 +55,7 @@ struct ReviewInfo: Codable {
 }
 
 // MARK: - Result
-struct MovieModel: Codable {
+struct Review: Codable {
     let displayTitle, mpaaRating: String
     let criticsPick: Int
     let byline, headline, summaryShort, publicationDate: String
