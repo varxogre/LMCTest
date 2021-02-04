@@ -18,12 +18,13 @@ protocol ReviewsStorageUpdateProtocol: class {
 class ReviewsStorage {
     
     weak var delegate: ReviewsStorageUpdateProtocol?
-    var temp = 0
     var offset = 0
     var searchingOffset = 0
     var hasMore = false
     var isSearching = false
+    var hasSearching = false
     var query: String?
+    var info: ReviewInfo?
     var reviews: [Review] = [] 
     var searchedReviews: [Review] = []
     
@@ -38,14 +39,20 @@ class ReviewsStorage {
                 }
             case .success(let reviewData):
                 DispatchQueue.main.async {
-                    self.reviews.append(contentsOf: reviewData.results)
+                    guard reviewData.numResults > 0 else {
+                        self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
+                        return
+                    }
+                    self.reviews.append(contentsOf: reviewData.results!)
                     if reviewData.hasMore {
                         self.offset += 20
                         if self.hasMore {
-                            let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results)
+                            let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
                             self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                            print("onFetchCompleted(with indexPath)")
                         } else {
                             self.delegate?.onFetchCompleted(with: nil)
+                            print("onFetchCompleted(withNil)")
                         }
                     }
                     self.hasMore = reviewData.hasMore
@@ -64,15 +71,22 @@ class ReviewsStorage {
                 }
             case .success(let reviewData):
                 DispatchQueue.main.async {
-                    self.searchedReviews.append(contentsOf: reviewData.results)
+                    guard reviewData.numResults > 0 else {
+                        self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
+                        return
+                    }
+                    self.searchedReviews.append(contentsOf: reviewData.results!)
                     print("searchedData was added")
-                    if self.isSearching, self.temp == self.searchedReviews.count {
-                            let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results)
-                            self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                        } else {
-                            self.isSearching = true
-                            self.delegate?.onFetchCompleted(with: nil)
-                        }
+                    if self.isSearching, self.hasSearching {
+                        print("onFetchCompleted(with indexPath)")
+//                        self.temp = 0
+                        let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
+                        self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                    } else {
+                        self.isSearching = true
+                        print("onFetchCompleted(withNil)")
+                        self.delegate?.onFetchCompleted(with: nil)
+                    }
                     if reviewData.hasMore {
                         self.searchingOffset += 20
                     }

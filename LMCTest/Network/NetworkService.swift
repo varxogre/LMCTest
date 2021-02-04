@@ -25,6 +25,7 @@ struct NetworkService {
             completion(.failure(.invalidURL))
             return
         }
+        print(url)
         let urlSession = URLSession.shared
         urlSession.dataTask(with: url) {
             switch $0 {

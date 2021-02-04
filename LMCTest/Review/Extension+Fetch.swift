@@ -46,11 +46,12 @@ extension ReviewsViewController {
     }
     
     func onFetchFailed(with reason: String) {
-        // TO-DO: alert controller with error
+        activityIndicator.stopAnimating()
+        print(reason)
     }
     
     func freeModel() {
-        model.temp = model.searchedReviews.count
+        model.hasSearching = false
         model.searchingOffset = 0
         model.searchedReviews.removeAll()
     }

@@ -44,7 +44,7 @@ struct ReviewInfo: Codable {
     let status, copyright: String
     let hasMore: Bool
     let numResults: Int
-    let results: [Review]
+    let results: [Review]?
 
     enum CodingKeys: String, CodingKey {
         case status, copyright

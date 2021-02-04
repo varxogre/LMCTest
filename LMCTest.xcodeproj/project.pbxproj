@@ -24,7 +24,7 @@
 		87AAB05F25CB156200C0DA28 /* ReviewerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB05E25CB156200C0DA28 /* ReviewerStorage.swift */; };
 		87AAB06225CB38D600C0DA28 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */; };
 		87AAB06525CB42C200C0DA28 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */; };
-		87AAB06825CB9E4900C0DA28 /* Extension+CellPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06725CB9E4900C0DA28 /* Extension+CellPagination.swift */; };
+		87AAB06825CB9E4900C0DA28 /* Extension+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06725CB9E4900C0DA28 /* Extension+Fetch.swift */; };
 		87AAB06B25CB9EF300C0DA28 /* Exttension+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06A25CB9EF300C0DA28 /* Exttension+TableView.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,7 @@
 		87AAB05E25CB156200C0DA28 /* ReviewerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerStorage.swift; sourceTree = "<group>"; };
 		87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
-		87AAB06725CB9E4900C0DA28 /* Extension+CellPagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CellPagination.swift"; sourceTree = "<group>"; };
+		87AAB06725CB9E4900C0DA28 /* Extension+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Fetch.swift"; sourceTree = "<group>"; };
 		87AAB06A25CB9EF300C0DA28 /* Exttension+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exttension+TableView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,7 +69,7 @@
 				8791F45D25C84920006099D2 /* ReviewsViewController.swift */,
 				872D46A325CA1E8800446CC7 /* ReviewCellTableViewCell.swift */,
 				87AAB05E25CB156200C0DA28 /* ReviewerStorage.swift */,
-				87AAB06725CB9E4900C0DA28 /* Extension+CellPagination.swift */,
+				87AAB06725CB9E4900C0DA28 /* Extension+Fetch.swift */,
 				87AAB06A25CB9EF300C0DA28 /* Exttension+TableView.swift */,
 			);
 			path = Review;
@@ -224,7 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87AAB06825CB9E4900C0DA28 /* Extension+CellPagination.swift in Sources */,
+				87AAB06825CB9E4900C0DA28 /* Extension+Fetch.swift in Sources */,
 				87AAB06225CB38D600C0DA28 /* Extension+UIImage.swift in Sources */,
 				8791F45E25C84920006099D2 /* ReviewsViewController.swift in Sources */,
 				87AAB06525CB42C200C0DA28 /* DateFormatterExtension.swift in Sources */,
