@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewsViewController: UIViewController, ReviewsStorageUpdateProtocol {
+class ReviewsViewController: UIViewController {
     
     
     var model: ReviewsStorage!
@@ -16,41 +16,38 @@ class ReviewsViewController: UIViewController, ReviewsStorageUpdateProtocol {
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var searchBar: UISearchBar!
     
-    lazy var refreshControl = UIRefreshControl()
-    lazy var activityIndicator = UIActivityIndicatorView()
+    lazy var refreshControl: UIRefreshControl = {
+        var refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        view.addSubview(activity)
+        view.bringSubviewToFront(activity)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activity.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activity.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        return activity
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createActivity()
+        activityIndicator.startAnimating()
         tabBarController?.tabBar.isHidden = true
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "cell")
+        tableView.addSubview(refreshControl)
         
         model = ReviewsStorage()
         model.fetchReviews()
         model.delegate = self
         
-        searchBar.delegate = self
-        
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        tableView.addSubview(refreshControl)
     }
-    
-    private func createActivity() {
-        let activity = UIActivityIndicatorView(style: .large)
-        view.addSubview(activity)
-        view.bringSubviewToFront(activity)
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activity.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activity.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            
-        ])
-        activityIndicator = activity
-        activity.startAnimating()
-    }
-    
-    
     
     @objc func refresh(_ sender: AnyObject) {
         if model.isSearching {

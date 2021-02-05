@@ -63,12 +63,12 @@ class ReviewCell: UITableViewCell {
         
         textStackView.axis = .vertical
         textStackView.alignment = .leading
-        textStackView.distribution = .fill
+//        textStackView.distribution = .fill
         textStackView.spacing = 8
         
         mainStackView.axis = .horizontal
         mainStackView.alignment = .top
-        mainStackView.distribution = .fill
+//        mainStackView.distribution = .fill
         mainStackView.spacing = 16
         
         contentView.addSubview(mainStackView)

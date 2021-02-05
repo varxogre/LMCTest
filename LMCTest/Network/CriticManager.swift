@@ -9,7 +9,7 @@ import Foundation
 
 struct CriticManager {
     
-    static func getCriticsByOffset(offset: Int, completion: @escaping (Result<CriticsInfo, Error>) -> Void) {
+    static func getCritics(completion: @escaping (Result<CriticsInfo, Error>) -> Void) {
         NetworkService.shared.performRequestByURL(
             url: APIConstants.critics) {
             switch $0 {

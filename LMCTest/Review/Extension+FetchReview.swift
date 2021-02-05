@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ReviewsViewController {
+extension ReviewsViewController: ReviewsStorageUpdateProtocol {
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
         if model.isSearching {
@@ -20,9 +20,7 @@ extension ReviewsViewController {
     func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath] {
         if model.isSearching {
             let startIndex = model.searchedReviews.count - newReviews.count
-            print("startIndex: \(startIndex)")
             let endIndex = startIndex + newReviews.count
-            print("endIndex: \(endIndex)")
             return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
         } else {
             let startIndex = model.reviews.count - newReviews.count

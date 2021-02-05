@@ -15,7 +15,7 @@ protocol ReviewsStorageUpdateProtocol: class {
 
 
 
-class ReviewsStorage {
+final class ReviewsStorage {
     
     weak var delegate: ReviewsStorageUpdateProtocol?
     var offset = 0
@@ -24,7 +24,6 @@ class ReviewsStorage {
     var isSearching = false
     var hasSearching = false
     var query: String?
-    var info: ReviewInfo?
     var reviews: [Review] = [] 
     var searchedReviews: [Review] = []
     
