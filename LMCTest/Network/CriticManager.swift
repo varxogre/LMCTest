@@ -23,8 +23,20 @@ struct CriticManager {
         }
     }
     
-
-    // TO-DO: searchFunc
+    static func getCritic(with name: String,
+                          completion: @escaping (Result<CriticsInfo, Error>) -> Void) {
+    NetworkService.shared.performRequestByURL(
+        url: baseURL + "critics/" + name + ".json?" + apiKey) {
+        switch $0 {
+        case .failure(let error):
+            completion(.failure(error))
+        case .success(let data):
+            if let critics: CriticsInfo = NetworkService.shared.decodeJSON(with: data) {
+                completion(.success(critics))
+            }
+        }
+    }
+}
     
 }
 

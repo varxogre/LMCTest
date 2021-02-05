@@ -21,8 +21,10 @@ struct NetworkService {
     private init() {}
     
     func performRequestByURL(url: String, completion: @escaping (Result<Data, NetworkHandlerError>) -> Void) {
+        print(url)
         guard let url = URL(string: url) else {
             completion(.failure(.invalidURL))
+            
             return
         }
         print(url)

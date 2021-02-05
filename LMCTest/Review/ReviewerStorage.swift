@@ -77,13 +77,10 @@ final class ReviewsStorage {
                     self.searchedReviews.append(contentsOf: reviewData.results!)
                     print("searchedData was added")
                     if self.isSearching, self.hasSearching {
-                        print("onFetchCompleted(with indexPath)")
-//                        self.temp = 0
                         let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                     } else {
                         self.isSearching = true
-                        print("onFetchCompleted(withNil)")
                         self.delegate?.onFetchCompleted(with: nil)
                     }
                     if reviewData.hasMore {

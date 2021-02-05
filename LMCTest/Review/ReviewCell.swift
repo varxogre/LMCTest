@@ -29,7 +29,7 @@ class ReviewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         mainImage.layer.cornerRadius = 5
         mainImage.clipsToBounds = true
-        mainImage.contentMode = .scaleAspectFill
+        mainImage.contentMode = .scaleAspectFit
         setupCell()
         setupConstraints()
     }

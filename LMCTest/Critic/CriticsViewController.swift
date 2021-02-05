@@ -33,6 +33,8 @@ class CriticsViewController: UIViewController {
         return activity
     }()
     
+    let sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 50.0, right: 10.0)
+    let itemsPerRow: CGFloat = 2
     var model: CriticsStorage!
     
     override func viewDidLoad() {
@@ -43,11 +45,11 @@ class CriticsViewController: UIViewController {
         
         collectionView.register(CriticCell.self, forCellWithReuseIdentifier: "criticCell")
         collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
         
         model = CriticsStorage()
         model.fetchCritics()
         model.delegate = self
-        
         
     }
     
@@ -58,11 +60,23 @@ class CriticsViewController: UIViewController {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-       
+        refreshControl.endRefreshing()
+        if model.isSearching {
+            model.isSearching = false
+            collectionView.reloadData()
+        }
+        model.fetchCritics()
     }
     
 }
 
 extension CriticsViewController: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if var query = searchBar.text {
+            query = query.prepareWhitespace()
+            activityIndicator.startAnimating()
+            model.searchedCritic.removeAll()
+            self.model.searchCritic(with: query)
+        }
+    }
 }

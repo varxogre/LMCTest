@@ -17,14 +17,10 @@ extension String {
         }
         return self
     }
-}
-
-extension Date {
-    func customizeDate() -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-        
-        return self
+     func prepareWhitespace() -> String {
+        return self.components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }
+            .joined(separator: "%20")
     }
 }

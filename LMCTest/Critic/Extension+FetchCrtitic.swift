@@ -9,18 +9,15 @@ import Foundation
 
 extension CriticsViewController: CriticsStorageUpdateProtocol {
     
-    func calculateIndexPathsToReload(from newCritics: [Critic]) -> [IndexPath] {
-        return [IndexPath()]
-    }
-    
     func onFetchCompleted() {
         activityIndicator.stopAnimating()
-        collectionView.reloadSections(IndexSet(integer: 0))
+        collectionView.reloadData()
         refreshControl.endRefreshing()
     }
     
     func onFetchFailed(with reason: String) {
-        
+        print(reason)
+        activityIndicator.stopAnimating()
     }
     
     

@@ -11,20 +11,21 @@ class CriticCell: UICollectionViewCell {
     
     lazy var criticImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
     lazy var criticNameLabel: UILabel = {
         let label = UILabel()
         label.minimumScaleFactor = 0.5
+        label.textAlignment = .center
         return label
     }()
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 4
         return stack
     }()
     
@@ -32,10 +33,16 @@ class CriticCell: UICollectionViewCell {
         super.init(frame: frame)
         createCell()
         setupConstraints()
+        contentView.backgroundColor = .cyan
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        criticImage.image = nil
+        criticNameLabel.text = nil
     }
     
     private func createCell() {
@@ -46,12 +53,12 @@ class CriticCell: UICollectionViewCell {
     
     private func setupConstraints() {
         mainStack.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
-            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            
         ])
     }
 }
