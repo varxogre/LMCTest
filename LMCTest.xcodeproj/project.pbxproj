@@ -30,7 +30,7 @@
 		87AAB06225CB38D600C0DA28 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */; };
 		87AAB06525CB42C200C0DA28 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */; };
 		87AAB06825CB9E4900C0DA28 /* Extension+FetchReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06725CB9E4900C0DA28 /* Extension+FetchReview.swift */; };
-		87AAB06B25CB9EF300C0DA28 /* Exttension+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06A25CB9EF300C0DA28 /* Exttension+TableView.swift */; };
+		87AAB06B25CB9EF300C0DA28 /* Extension+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06A25CB9EF300C0DA28 /* Extension+TableView.swift */; };
 		87BDF7A725CC997C0029853F /* CriticsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BDF7A625CC997C0029853F /* CriticsStorage.swift */; };
 		87BDF7AA25CC9AFF0029853F /* CriticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BDF7A925CC9AFF0029853F /* CriticCell.swift */; };
 		87BDF7B025CCA6030029853F /* Extension+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BDF7AF25CCA6030029853F /* Extension+CollectionView.swift */; };
@@ -63,7 +63,7 @@
 		87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		87AAB06725CB9E4900C0DA28 /* Extension+FetchReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+FetchReview.swift"; sourceTree = "<group>"; };
-		87AAB06A25CB9EF300C0DA28 /* Exttension+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exttension+TableView.swift"; sourceTree = "<group>"; };
+		87AAB06A25CB9EF300C0DA28 /* Extension+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+TableView.swift"; sourceTree = "<group>"; };
 		87BDF7A625CC997C0029853F /* CriticsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsStorage.swift; sourceTree = "<group>"; };
 		87BDF7A925CC9AFF0029853F /* CriticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticCell.swift; sourceTree = "<group>"; };
 		87BDF7AF25CCA6030029853F /* Extension+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CollectionView.swift"; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 				872D46A325CA1E8800446CC7 /* ReviewCell.swift */,
 				87AAB05E25CB156200C0DA28 /* ReviewerStorage.swift */,
 				87AAB06725CB9E4900C0DA28 /* Extension+FetchReview.swift */,
-				87AAB06A25CB9EF300C0DA28 /* Exttension+TableView.swift */,
+				87AAB06A25CB9EF300C0DA28 /* Extension+TableView.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -265,7 +265,7 @@
 				8791F45E25C84920006099D2 /* ReviewsViewController.swift in Sources */,
 				87AAB06525CB42C200C0DA28 /* DateFormatterExtension.swift in Sources */,
 				87875FF225CDF2BC002FEEE0 /* DetailStorage.swift in Sources */,
-				87AAB06B25CB9EF300C0DA28 /* Exttension+TableView.swift in Sources */,
+				87AAB06B25CB9EF300C0DA28 /* Extension+TableView.swift in Sources */,
 				87BDF7B025CCA6030029853F /* Extension+CollectionView.swift in Sources */,
 				872D46A125CA1C4700446CC7 /* customSegmentedControl.swift in Sources */,
 				8791F47525C89762006099D2 /* APIConstants.swift in Sources */,

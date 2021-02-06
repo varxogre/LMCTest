@@ -1,5 +1,5 @@
 //
-//  Exttension+TableView.swift
+//  Extension+TableView.swift
 //  LMCTest
 //
 //  Created by сергей on 04.02.2021.

@@ -10,6 +10,7 @@ import UIKit
 class DetailCriticController: UIViewController {
     
     var model: DetailStorage!
+    var critic: Critic?
     
     @IBOutlet var tableView: UITableView!
     
@@ -54,8 +55,8 @@ class DetailCriticController: UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         model.offset = 0
-        model.isFirstRequest = true
         model.hasMore = true
+        model.isFirstRequest = true
         model.fetchReviews()
     }
    

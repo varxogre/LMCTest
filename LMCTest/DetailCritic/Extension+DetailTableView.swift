@@ -31,6 +31,7 @@ extension DetailCriticController: UITableViewDataSource, UITableViewDelegate  {
             guard let cell = tableView.dequeueReusableCell(withIdentifier:
                                                             "detailCell",
                                                            for: indexPath) as? DetailCell else {return UITableViewCell()}
+            cell.configureCellWith(critic?.displayName, critic?.status, critic?.bio, image: critic?.multimedia?.resource.src )
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier:

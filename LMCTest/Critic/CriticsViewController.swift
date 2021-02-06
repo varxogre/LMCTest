@@ -75,8 +75,9 @@ class CriticsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "show" else { return }
+        guard let sender = sender as? Critic else { return }
         if let detailVC = segue.destination as? DetailCriticController {
-            detailVC.navigationItem.title = "DSdlms;ln;"
+            detailVC.critic = sender
         }
     }
     

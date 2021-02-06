@@ -8,6 +8,13 @@
 import UIKit
 
 class DetailCell: UITableViewCell {
+    
+    func configureCellWith(_ name: String, _ status: String, _ bio: String?, image: String) {
+        criticNameLabel.text = name
+        criticStatusLabel.text = status
+        criticBioLabel.text = bio
+        criticImage.loadImageUsingCache(withUrl: image)
+    }
 
 
     lazy var criticImage: UIImageView = {
@@ -35,7 +42,6 @@ class DetailCell: UITableViewCell {
     
     lazy var criticBioLabel: UILabel = {
         let label = UILabel()
-//        label.text = "Manohla Dargis is the co-chief film cri eles."
         label.numberOfLines = 0
         label.textAlignment = .left
         return label
