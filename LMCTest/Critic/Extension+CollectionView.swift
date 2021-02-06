@@ -66,3 +66,8 @@ extension CriticsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension CriticsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "show", sender: self)
+    }
+}

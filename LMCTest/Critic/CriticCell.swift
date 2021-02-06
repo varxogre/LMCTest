@@ -33,7 +33,7 @@ class CriticCell: UICollectionViewCell {
         super.init(frame: frame)
         createCell()
         setupConstraints()
-        contentView.backgroundColor = .cyan
+        contentView.backgroundColor = .systemBlue
     }
     
     required init?(coder: NSCoder) {

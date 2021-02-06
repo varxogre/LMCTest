@@ -37,6 +37,20 @@ struct ReviewManager {
         }
     }
     
+    static func getReviewsByReviewer(with name: String, offset: Int, completion: @escaping (Result<ReviewInfo, Error>) -> Void) {
+        NetworkService.shared.performRequestByURL(
+            url: APIConstants.reviewsQuery + "&reviewer=" + name + "&offset=" + String(offset)) {
+            switch $0 {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let data):
+                if let reviews: ReviewInfo = NetworkService.shared.decodeJSON(with: data) {
+                    completion(.success(reviews))
+                }
+            }
+        }
+    }
+    
 }
 
 // MARK: - Info

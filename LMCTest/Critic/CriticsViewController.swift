@@ -53,7 +53,12 @@ class CriticsViewController: UIViewController {
         
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    
     @IBAction func segment(_ sender: customSegmentedControl) {
         tabBarController?.selectedIndex = sender.selectedSegmentIndex
         sender.selectedSegmentIndex = 1
@@ -66,6 +71,13 @@ class CriticsViewController: UIViewController {
             collectionView.reloadData()
         }
         model.fetchCritics()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "show" else { return }
+        if let detailVC = segue.destination as? DetailCriticController {
+            detailVC.navigationItem.title = "DSdlms;ln;"
+        }
     }
     
 }

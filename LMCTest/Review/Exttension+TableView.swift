@@ -12,7 +12,7 @@ extension ReviewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {
             if model.isSearching {
-                return model.searchReviews()
+                model.searchReviews()
             } else {
                 model.fetchReviews()
             }
@@ -55,7 +55,7 @@ extension ReviewsViewController: UITableViewDataSource, UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return tableView.estimatedRowHeight
     }
     
 }

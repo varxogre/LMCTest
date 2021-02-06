@@ -58,6 +58,12 @@ class ReviewsViewController: UIViewController {
         model.fetchReviews()
     }
     
+    func freeModel() {
+        model.hasSearching = false
+        model.searchingOffset = 0
+        model.searchedReviews.removeAll()
+    }
+    
     @IBAction func segment(_ sender: customSegmentedControl) {
         tabBarController?.selectedIndex = sender.selectedSegmentIndex
         sender.selectedSegmentIndex = 0

@@ -20,7 +20,7 @@ final class ReviewsStorage {
     weak var delegate: ReviewsStorageUpdateProtocol?
     var offset = 0
     var searchingOffset = 0
-    var hasMore = false
+    var hasMore = true
     var isSearching = false
     var hasSearching = false
     var query: String?
@@ -28,6 +28,7 @@ final class ReviewsStorage {
     var searchedReviews: [Review] = []
     
     func fetchReviews() {
+        guard hasMore else { return }
         ReviewManager.getReviewsByOffset(offset: offset) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -79,7 +80,9 @@ final class ReviewsStorage {
                     if self.isSearching, self.hasSearching {
                         let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                        print("true")
                     } else {
+                        print("false")
                         self.isSearching = true
                         self.delegate?.onFetchCompleted(with: nil)
                     }
