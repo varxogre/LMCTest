@@ -21,6 +21,7 @@ final class ReviewsStorage {
     var offset = 0
     var searchingOffset = 0
     var hasMore = true
+    var searchHasMore = true
     var isSearching = false
     var hasSearching = false
     var query: String?
@@ -44,16 +45,16 @@ final class ReviewsStorage {
                         return
                     }
                     self.reviews.append(contentsOf: reviewData.results!)
+                    if self.hasMore {
+                        let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
+                        self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                        print("onFetchCompleted(with indexPath)")
+                    } else {
+                        self.delegate?.onFetchCompleted(with: nil)
+                        print("onFetchCompleted(withNil)")
+                    }
                     if reviewData.hasMore {
                         self.offset += 20
-                        if self.hasMore {
-                            let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
-                            self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                            print("onFetchCompleted(with indexPath)")
-                        } else {
-                            self.delegate?.onFetchCompleted(with: nil)
-                            print("onFetchCompleted(withNil)")
-                        }
                     }
                     self.hasMore = reviewData.hasMore
                 }
@@ -62,6 +63,7 @@ final class ReviewsStorage {
     }
     
     func searchReviews() {
+        guard searchHasMore else { return }
         ReviewManager.getReviewsBySearch(with: query!, offset: searchingOffset) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -75,20 +77,22 @@ final class ReviewsStorage {
                         self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
                         return
                     }
+                    if !self.hasSearching {
+                        self.searchedReviews.removeAll()
+                    }
                     self.searchedReviews.append(contentsOf: reviewData.results!)
-                    print("searchedData was added")
                     if self.isSearching, self.hasSearching {
                         let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                        print("true")
                     } else {
-                        print("false")
                         self.isSearching = true
+                        self.hasSearching = true
                         self.delegate?.onFetchCompleted(with: nil)
                     }
                     if reviewData.hasMore {
                         self.searchingOffset += 20
                     }
+                    self.searchHasMore = reviewData.hasMore
                 }
             }
         }

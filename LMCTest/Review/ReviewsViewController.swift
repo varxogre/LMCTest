@@ -61,7 +61,7 @@ class ReviewsViewController: UIViewController {
     func freeModel() {
         model.hasSearching = false
         model.searchingOffset = 0
-        model.searchedReviews.removeAll()
+        model.searchHasMore = true
     }
     
     @IBAction func segment(_ sender: customSegmentedControl) {
