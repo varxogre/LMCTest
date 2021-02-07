@@ -12,7 +12,7 @@ class CriticsViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var segment: customSegmentedControl!
-    
+        
     lazy var refreshControl: UIRefreshControl = {
         var refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -35,6 +35,7 @@ class CriticsViewController: UIViewController {
     
     let sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 50.0, right: 10.0)
     let itemsPerRow: CGFloat = 2
+    
     var model: CriticsStorage!
     
     override func viewDidLoad() {
@@ -43,9 +44,11 @@ class CriticsViewController: UIViewController {
         segment.selectedSegmentIndex = 1
         tabBarController?.tabBar.isHidden = true
         
+        collectionView.backgroundColor = .systemGray6
         collectionView.register(CriticCell.self, forCellWithReuseIdentifier: "criticCell")
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .onDrag
         
         model = CriticsStorage()
         model.fetchCritics()
@@ -78,6 +81,8 @@ class CriticsViewController: UIViewController {
         guard let sender = sender as? Critic else { return }
         if let detailVC = segue.destination as? DetailCriticController {
             detailVC.critic = sender
+            detailVC.navigationItem.title = sender.displayName
+            
         }
     }
     
@@ -91,5 +96,6 @@ extension CriticsViewController: UISearchBarDelegate {
             model.searchedCritic.removeAll()
             self.model.searchCritic(with: query)
         }
+        searchBar.resignFirstResponder()
     }
 }

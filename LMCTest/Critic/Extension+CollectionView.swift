@@ -30,6 +30,7 @@ extension CriticsViewController: UICollectionViewDataSource {
             }
         } else {
             cell.criticNameLabel.text = model.critics[indexPath.row].displayName
+            print(model.critics[indexPath.row].displayName)
             if let imageStr = model.critics[indexPath.row].multimedia?.resource.src {
                 cell.criticImage.loadImageUsingCache(withUrl: imageStr)
             } else {
@@ -71,3 +72,4 @@ extension CriticsViewController: UICollectionViewDelegate {
         performSegue(withIdentifier: "show", sender: model.critics[indexPath.row])
     }
 }
+

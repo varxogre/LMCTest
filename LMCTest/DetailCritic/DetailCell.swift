@@ -9,23 +9,26 @@ import UIKit
 
 class DetailCell: UITableViewCell {
     
-    func configureCellWith(_ name: String, _ status: String, _ bio: String?, image: String) {
+    func configureCellWith(_ name: String, _ status: String, _ bio: String?, image: String?) {
         criticNameLabel.text = name
         criticStatusLabel.text = status
         criticBioLabel.text = bio
+        guard let image = image else {
+            criticImage.image = UIImage(named: "person.circle")
+            return
+        }
         criticImage.loadImageUsingCache(withUrl: image)
     }
 
 
     lazy var criticImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "person.circle"))
+        let image = UIImageView()
         image.contentMode = .scaleAspectFit
         return image
     }()
     
     lazy var criticNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Mark Cubanbbkjhj"
         label.font = UIFont.systemFont(ofSize: 20.0)
         label.textAlignment = .left
         return label
@@ -33,10 +36,9 @@ class DetailCell: UITableViewCell {
     
     lazy var criticStatusLabel: UILabel = {
         let label = UILabel()
-        label.text = "part-time"
-        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 10.0)
         label.textAlignment = .center
-        label.backgroundColor = .blue
+        label.backgroundColor = .systemTeal
         return label
     }()
     
@@ -71,13 +73,15 @@ class DetailCell: UITableViewCell {
         return stack
     }()
     
-    
+    override func layoutSubviews() {
+        setupConstraints()
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         createCell()
         setupConstraints()
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
@@ -92,6 +96,7 @@ class DetailCell: UITableViewCell {
     private func setupConstraints() {
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            criticImage.heightAnchor.constraint(equalTo: criticImage.widthAnchor, multiplier: 1),
             textStack.heightAnchor.constraint(equalTo: criticImage.heightAnchor, multiplier: 0.7),
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),

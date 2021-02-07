@@ -13,14 +13,15 @@ let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
     func loadImageUsingCache(withUrl urlString : String) {
         let url = URL(string: urlString)
+        print(url)
         if url == nil { return }
         self.image = nil
 
-//        // check cached image
-//        if let cachedImage = imageCache.object(forKey: urlString as NSString)  {
-//            self.image = cachedImage
-//            return
-//        }
+        // check cached image
+        if let cachedImage = imageCache.object(forKey: urlString as NSString)  {
+            self.image = cachedImage
+            return
+        }
 
         let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView.init(style: .medium)
         addSubview(activityIndicator)

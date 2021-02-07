@@ -55,7 +55,7 @@ extension ReviewsViewController: UITableViewDataSource, UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.estimatedRowHeight
+        return  view.frame.width / 2.5
     }
     
 }

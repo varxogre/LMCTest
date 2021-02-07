@@ -29,6 +29,7 @@ struct CriticManager {
         url: baseURL + "critics/" + name + ".json?" + apiKey) {
         switch $0 {
         case .failure(let error):
+            print(error.localizedDescription)
             completion(.failure(error))
         case .success(let data):
             if let critics: CriticsInfo = NetworkService.shared.decodeJSON(with: data) {
@@ -44,7 +45,7 @@ struct CriticManager {
 struct CriticsInfo: Codable {
     let status, copyright: String
     let numResults: Int
-    let results: [Critic]
+    let results: [Critic]?
 
     enum CodingKeys: String, CodingKey {
         case status, copyright

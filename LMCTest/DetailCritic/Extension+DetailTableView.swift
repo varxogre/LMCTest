@@ -27,11 +27,13 @@ extension DetailCriticController: UITableViewDataSource, UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        if indexPath.section == 0  {
             guard let cell = tableView.dequeueReusableCell(withIdentifier:
                                                             "detailCell",
                                                            for: indexPath) as? DetailCell else {return UITableViewCell()}
-            cell.configureCellWith(critic?.displayName, critic?.status, critic?.bio, image: critic?.multimedia?.resource.src )
+            
+            guard let critic = critic else { return UITableViewCell()}
+            cell.configureCellWith(critic.displayName, critic.status.rawValue, critic.bio.prepareBio(), image: critic.multimedia?.resource.src)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier:
@@ -50,6 +52,10 @@ extension DetailCriticController: UITableViewDataSource, UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.estimatedRowHeight
+        if indexPath.section == 0 {
+            return tableView.estimatedRowHeight
+        } else {
+            return  view.frame.width / 2.5
+        }
     }
 }

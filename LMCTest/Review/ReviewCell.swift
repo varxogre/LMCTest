@@ -12,7 +12,7 @@ class ReviewCell: UITableViewCell {
     func configureCellWith(_ label: String, _ summary: String, _ byline: String, _ date: String) {
         reviewTitleLabel.text = label
         summaryTextLabel.text = summary
-        reviewerBylineLabel.text = byline
+        reviewerBylineLabel.text = byline.capitalized
         updatedDateLabel.text = date.customizeDate()
     }
     
@@ -27,9 +27,10 @@ class ReviewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .white
         mainImage.layer.cornerRadius = 5
         mainImage.clipsToBounds = true
-        mainImage.contentMode = .scaleAspectFit
+        mainImage.contentMode = .scaleAspectFill
         setupCell()
         setupConstraints()
     }
@@ -44,6 +45,10 @@ class ReviewCell: UITableViewCell {
         reviewerBylineLabel.text = nil
         updatedDateLabel.text = nil
         mainImage.image = nil
+    }
+    
+    override func layoutSubviews() {
+        setupConstraints()
     }
     
     private func setupCell() {
@@ -63,12 +68,10 @@ class ReviewCell: UITableViewCell {
         
         textStackView.axis = .vertical
         textStackView.alignment = .leading
-//        textStackView.distribution = .fill
         textStackView.spacing = 8
         
         mainStackView.axis = .horizontal
         mainStackView.alignment = .top
-//        mainStackView.distribution = .fill
         mainStackView.spacing = 16
         
         contentView.addSubview(mainStackView)

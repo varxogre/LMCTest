@@ -18,14 +18,13 @@ final class DetailStorage {
     var offset = 0
     var hasMore = true
     var isFirstRequest = true
-    var query: String = "Renata%20Adler"
+    var query: String?
     var reviews: [Review] = []
-    var critic: Critic?
     
     
     func fetchReviews() {
         guard hasMore else { return }
-        ReviewManager.getReviewsByReviewer(with: query, offset: offset) { [weak self] (result) in
+        ReviewManager.getReviewsByReviewer(with: query!, offset: offset) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(let error):

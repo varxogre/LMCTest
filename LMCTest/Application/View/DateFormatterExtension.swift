@@ -23,4 +23,9 @@ extension String {
             .filter { !$0.isEmpty }
             .joined(separator: "%20")
     }
+    
+    func prepareBio() -> String {
+        return self.components(separatedBy: "<br/><br/>")
+            .filter{ !$0.isEmpty }.joined()
+    }
 }

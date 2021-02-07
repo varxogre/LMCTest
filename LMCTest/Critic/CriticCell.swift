@@ -17,13 +17,14 @@ class CriticCell: UICollectionViewCell {
     
     lazy var criticNameLabel: UILabel = {
         let label = UILabel()
-        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 15)
         label.textAlignment = .center
         return label
     }()
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView()
+        stack.distribution = .fill
         stack.axis = .vertical
         stack.spacing = 4
         return stack
@@ -33,7 +34,7 @@ class CriticCell: UICollectionViewCell {
         super.init(frame: frame)
         createCell()
         setupConstraints()
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +44,10 @@ class CriticCell: UICollectionViewCell {
     override func prepareForReuse() {
         criticImage.image = nil
         criticNameLabel.text = nil
+    }
+    
+    override func layoutMarginsDidChange() {
+        setupConstraints()
     }
     
     private func createCell() {

@@ -40,8 +40,11 @@ class ReviewsViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         tabBarController?.tabBar.isHidden = true
+        
+        tableView.backgroundColor = .systemGray6
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "cell")
         tableView.addSubview(refreshControl)
+        tableView.keyboardDismissMode = .onDrag
         
         model = ReviewsStorage()
         model.fetchReviews()
@@ -68,11 +71,10 @@ class ReviewsViewController: UIViewController {
         tabBarController?.selectedIndex = sender.selectedSegmentIndex
         sender.selectedSegmentIndex = 0
     }
-
+    
     @IBAction func dateChanged(_ sender: UIDatePicker) {
         print(sender.date)
     }
-    
     
 }
 
@@ -85,6 +87,7 @@ extension ReviewsViewController: UISearchBarDelegate {
             freeModel()
             self.model.searchReviews()
         }
+        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

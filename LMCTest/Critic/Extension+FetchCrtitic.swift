@@ -16,8 +16,8 @@ extension CriticsViewController: CriticsStorageUpdateProtocol {
     }
     
     func onFetchFailed(with reason: String) {
-        print(reason)
         activityIndicator.stopAnimating()
+        print(reason)
     }
     
     

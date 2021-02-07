@@ -36,11 +36,11 @@ final class CriticsStorage {
                     }
                     if criticsInfo.numResults == self.critics.count {
                         self.critics.removeAll()
-                        self.critics.append(contentsOf: criticsInfo.results)
+                        self.critics.append(contentsOf: criticsInfo.results!)
                         self.delegate?.onFetchCompleted()
                         return
                     }
-                    self.critics.append(contentsOf: criticsInfo.results)
+                    self.critics.append(contentsOf: criticsInfo.results!)
                     self.delegate?.onFetchCompleted()
                 }
             }
@@ -50,6 +50,7 @@ final class CriticsStorage {
     func searchCritic(with name: String) {
         CriticManager.getCritic(with: name) { [weak self] (result) in
             guard let self = self else { return }
+            print(result)
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -62,8 +63,7 @@ final class CriticsStorage {
                         return
                     }
                     self.isSearching = true
-                    self.searchedCritic.append(contentsOf: criticsInfo.results)
-                    print("onfetch")
+                    self.searchedCritic.append(contentsOf: criticsInfo.results!)
                     self.delegate?.onFetchCompleted()
                 }
             }

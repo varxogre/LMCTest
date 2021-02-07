@@ -38,11 +38,13 @@ class DetailCriticController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
+        tableView.backgroundColor = .systemGray6
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "reviewCell")
         tableView.register(DetailCell.self, forCellReuseIdentifier: "detailCell")
         tableView.addSubview(refreshControl)
         model = DetailStorage()
         model.delegate = self
+        model.query = critic?.displayName.prepareWhitespace()
         model.fetchReviews()
     }
     
@@ -58,6 +60,15 @@ class DetailCriticController: UIViewController {
         model.hasMore = true
         model.isFirstRequest = true
         model.fetchReviews()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print(#function)
+    }
+    
+    deinit {
+        print(#function)
     }
    
 }
