@@ -10,7 +10,7 @@ import UIKit
 
 extension ReviewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
+        if indexPaths.contains(where: model.isLoadingCell) {
             if model.isSearching {
                 model.searchReviews()
             } else {

@@ -30,7 +30,6 @@ extension CriticsViewController: UICollectionViewDataSource {
             }
         } else {
             cell.criticNameLabel.text = model.critics[indexPath.row].displayName
-            print(model.critics[indexPath.row].displayName)
             if let imageStr = model.critics[indexPath.row].multimedia?.resource.src {
                 cell.criticImage.loadImageUsingCache(withUrl: imageStr)
             } else {
@@ -69,7 +68,8 @@ extension CriticsViewController: UICollectionViewDelegateFlowLayout {
 
 extension CriticsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "show", sender: model.critics[indexPath.row])
+         let critic = model.isSearching ? model.searchedCritic[indexPath.row] : model.critics[indexPath.row]
+        performSegue(withIdentifier: "show", sender: critic)
     }
 }
 

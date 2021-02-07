@@ -33,6 +33,7 @@ class CriticsViewController: UIViewController {
         return activity
     }()
     
+    // - Mark constants
     let sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 50.0, right: 10.0)
     let itemsPerRow: CGFloat = 2
     
@@ -42,18 +43,8 @@ class CriticsViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         segment.selectedSegmentIndex = 1
-        tabBarController?.tabBar.isHidden = true
-        
-        collectionView.backgroundColor = .systemGray6
-        collectionView.register(CriticCell.self, forCellWithReuseIdentifier: "criticCell")
-        collectionView.addSubview(refreshControl)
-        collectionView.alwaysBounceVertical = true
-        collectionView.keyboardDismissMode = .onDrag
-        
-        model = CriticsStorage()
-        model.fetchCritics()
-        model.delegate = self
-        
+        setupCollection()
+        initModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,10 +52,18 @@ class CriticsViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    private func setupCollection() {
+        collectionView.register(CriticCell.self, forCellWithReuseIdentifier: "criticCell")
+        collectionView.backgroundColor = .systemGray6
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .onDrag
+    }
     
-    @IBAction func segment(_ sender: customSegmentedControl) {
-        tabBarController?.selectedIndex = sender.selectedSegmentIndex
-        sender.selectedSegmentIndex = 1
+    private func initModel() {
+        model = CriticsStorage()
+        model.fetchCritics()
+        model.delegate = self
     }
     
     @objc func refresh(_ sender: AnyObject) {
@@ -76,13 +75,27 @@ class CriticsViewController: UIViewController {
         model.fetchCritics()
     }
     
+    func showAlert(with message: String) {
+        let alert = UIAlertController(
+            title: "Ooops.", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(
+            title: "Ok", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func segment(_ sender: customSegmentedControl) {
+        tabBarController?.selectedIndex = sender.selectedSegmentIndex
+        sender.selectedSegmentIndex = 1
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "show" else { return }
         guard let sender = sender as? Critic else { return }
         if let detailVC = segue.destination as? DetailCriticController {
             detailVC.critic = sender
             detailVC.navigationItem.title = sender.displayName
-            
         }
     }
     
@@ -91,7 +104,7 @@ class CriticsViewController: UIViewController {
 extension CriticsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if var query = searchBar.text {
-            query = query.prepareWhitespace()
+            query = query.prepareWhitespace().capitalized
             activityIndicator.startAnimating()
             model.searchedCritic.removeAll()
             self.model.searchCritic(with: query)

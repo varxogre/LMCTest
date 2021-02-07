@@ -9,7 +9,7 @@ import UIKit
 
 extension DetailCriticController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell(for:)) {
+        if indexPaths.contains(where: model.isLoadingCell(for:)) {
             model.fetchReviews()
         }
     }
@@ -33,14 +33,16 @@ extension DetailCriticController: UITableViewDataSource, UITableViewDelegate  {
                                                            for: indexPath) as? DetailCell else {return UITableViewCell()}
             
             guard let critic = critic else { return UITableViewCell()}
-            cell.configureCellWith(critic.displayName, critic.status.rawValue, critic.bio.prepareBio(), image: critic.multimedia?.resource.src)
+            cell.configureCellWith(critic.displayName, critic.status.rawValue,
+                                   critic.bio.prepareBio(), image: critic.multimedia?.resource.src)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier:
                                                             "reviewCell",
                                                            for: indexPath) as? ReviewCell else {return UITableViewCell()}
             let source = model.reviews[indexPath.row]
-            cell.configureCellWith(source.displayTitle, source.summaryShort, source.byline, source.dateUpdated)
+            cell.configureCellWith(source.displayTitle, source.summaryShort,
+                                   source.byline, source.dateUpdated)
             if let imageStr = model.reviews[indexPath.row].multimedia?.src {
                 cell.mainImage.loadImageUsingCache(withUrl: imageStr)
             } else {

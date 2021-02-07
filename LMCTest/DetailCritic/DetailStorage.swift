@@ -7,14 +7,8 @@
 
 import Foundation
 
-protocol DetailStorageUpdateProtocol: class {
-    func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath]
-    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-    func onFetchFailed(with reason: String)
-}
-
 final class DetailStorage {
-    weak var delegate: DetailStorageUpdateProtocol?
+    weak var delegate: StorageUpdateProtocol?
     var offset = 0
     var hasMore = true
     var isFirstRequest = true
@@ -42,7 +36,7 @@ final class DetailStorage {
                     }
                     self.reviews.append(contentsOf: reviewData.results!) 
                     if self.hasMore, !self.isFirstRequest {
-                        let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                         print("onFetchCompleted(with indexPath)")
                     } else {
@@ -57,6 +51,23 @@ final class DetailStorage {
                 }
             }
         }
+    }
+    
+    func prepareModelForRefresh() {
+        offset = 0
+        hasMore = true
+        isFirstRequest = true
+        fetchReviews()
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= reviews.count - 1
+    }
+    
+    private func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath] {
+        let startIndex = reviews.count - newReviews.count
+        let endIndex = startIndex + newReviews.count
+        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 1) }
     }
     
     

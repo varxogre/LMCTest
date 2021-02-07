@@ -16,26 +16,69 @@ class ReviewCell: UITableViewCell {
         updatedDateLabel.text = date.customizeDate()
     }
     
-    let reviewTitleLabel = UILabel()
-    let summaryTextLabel = UILabel()
-    let reviewerBylineLabel = UILabel()
-    let updatedDateLabel = UILabel()
-    let mainImage = UIImageView()
- 
-    private var textStackView = UIStackView()
-    private var mainStackView = UIStackView()
+    lazy var reviewTitleLabel: UILabel = {
+        let label =  UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    lazy var summaryTextLabel: UILabel = {
+        let label =  UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 3
+        return label
+    }()
+    
+    lazy var reviewerBylineLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17)
+        return label
+    }()
+    
+    lazy var updatedDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    lazy var mainImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    lazy var textStackView: UIStackView = {
+        let stack = UIStackView(
+            arrangedSubviews: [reviewTitleLabel, summaryTextLabel,
+                               reviewerBylineLabel, updatedDateLabel])
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.spacing = 8
+        return stack
+    }()
+    
+    lazy var mainStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [mainImage, textStackView])
+        stack.axis = .horizontal
+        stack.alignment = .top
+        stack.spacing = 16
+        return stack
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        mainImage.layer.cornerRadius = 5
-        mainImage.clipsToBounds = true
-        mainImage.contentMode = .scaleAspectFill
         setupCell()
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
+        super.init(coder: coder)
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -48,32 +91,8 @@ class ReviewCell: UITableViewCell {
     }
     
     private func setupCell() {
-        
-        reviewTitleLabel.font = UIFont.boldSystemFont(ofSize: 22)
-        reviewTitleLabel.adjustsFontSizeToFitWidth = true
-        summaryTextLabel.font = UIFont.systemFont(ofSize: 14)
-        summaryTextLabel.minimumScaleFactor = 0.5
-        summaryTextLabel.numberOfLines = 3
-        reviewerBylineLabel.font = UIFont.systemFont(ofSize: 17)
-        updatedDateLabel.font = UIFont.systemFont(ofSize: 10)
-        
-        updatedDateLabel.textColor = .lightGray
-        
-        textStackView = UIStackView(arrangedSubviews: [reviewTitleLabel, summaryTextLabel, reviewerBylineLabel, updatedDateLabel])
-        mainStackView = UIStackView(arrangedSubviews: [mainImage, textStackView])
-        
-        textStackView.axis = .vertical
-        textStackView.alignment = .leading
-        textStackView.spacing = 8
-        
-        mainStackView.axis = .horizontal
-        mainStackView.alignment = .top
-        mainStackView.spacing = 16
-        
         contentView.addSubview(mainStackView)
-        
     }
-    
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([

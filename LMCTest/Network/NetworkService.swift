@@ -29,8 +29,11 @@ struct NetworkService {
         urlSession.dataTask(with: url) {
             switch $0 {
             case .success(let (response, data)):
-                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200 == statusCode else {
-                    completion(.failure(.invalidResponse))
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { return }
+                guard statusCode == 200 else {
+                    if statusCode == 429 {
+                        completion(.failure(.invalidResponse))
+                    }
                     return
                 }
                 completion(.success(data))

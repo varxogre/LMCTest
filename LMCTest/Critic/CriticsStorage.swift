@@ -7,18 +7,13 @@
 
 import Foundation
 
-protocol CriticsStorageUpdateProtocol: class {
-    func onFetchCompleted()
-    func onFetchFailed(with reason: String)
-}
-
 final class CriticsStorage {
     
-    weak var delegate: CriticsStorageUpdateProtocol?
+    weak var delegate: StorageUpdateProtocol?
     
+    var isSearching = false
     var critics: [Critic] = []
     var searchedCritic: [Critic] = []
-    var isSearching = false
     
     func fetchCritics() {
         CriticManager.getCritics { [weak self] (result) in
@@ -37,11 +32,11 @@ final class CriticsStorage {
                     if criticsInfo.numResults == self.critics.count {
                         self.critics.removeAll()
                         self.critics.append(contentsOf: criticsInfo.results!)
-                        self.delegate?.onFetchCompleted()
+                        self.delegate?.onFetchCompleted(with: nil)
                         return
                     }
                     self.critics.append(contentsOf: criticsInfo.results!)
-                    self.delegate?.onFetchCompleted()
+                    self.delegate?.onFetchCompleted(with: nil)
                 }
             }
         }
@@ -50,7 +45,6 @@ final class CriticsStorage {
     func searchCritic(with name: String) {
         CriticManager.getCritic(with: name) { [weak self] (result) in
             guard let self = self else { return }
-            print(result)
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -64,7 +58,7 @@ final class CriticsStorage {
                     }
                     self.isSearching = true
                     self.searchedCritic.append(contentsOf: criticsInfo.results!)
-                    self.delegate?.onFetchCompleted()
+                    self.delegate?.onFetchCompleted(with: nil)
                 }
             }
         }

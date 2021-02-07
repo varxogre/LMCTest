@@ -7,8 +7,7 @@
 
 import Foundation
 
-protocol ReviewsStorageUpdateProtocol: class {
-    func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath]
+protocol StorageUpdateProtocol: class {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
     func onFetchFailed(with reason: String?)
 }
@@ -17,26 +16,14 @@ protocol ReviewsStorageUpdateProtocol: class {
 
 final class ReviewsStorage {
     
-    weak var delegate: ReviewsStorageUpdateProtocol?
+    weak var delegate: StorageUpdateProtocol?
     var offset = 0
     var searchingOffset = 0
     var hasMore = true
     var searchHasMore = true
-    var isSearching = false {
-        didSet {
-            print("isSearching:\(isSearching)")
-        }
-    }
-    var hasSearching = false {
-        didSet {
-            print("hasSearching: \(hasSearching)")
-        }
-    }
-    var isFiltering = false {
-        didSet {
-            print("isFiltering:\(isFiltering)")
-        }
-    }
+    var isSearching = false
+    var hasSearching = false
+    var isFiltering = false
     let today: String = Date().customizeDate()
     var query: String?
     var reviews: [Review] = []
@@ -49,7 +36,11 @@ final class ReviewsStorage {
             guard let self = self else { return }
             switch result {
             case .failure(let error):
-                    print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    if error  == .invalidResponse {
+                        self.delegate?.onFetchFailed(with: "Слишком много запросов, попробуйте повторить через минуту.")
+                    }
+                }
             case .success(let reviewData):
                 DispatchQueue.main.async {
                     guard reviewData.numResults > 0 else {
@@ -58,7 +49,7 @@ final class ReviewsStorage {
                     }
                     self.reviews.append(contentsOf: reviewData.results!)
                     if self.hasMore {
-                        let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                     } else {
                         self.delegate?.onFetchCompleted(with: nil)
@@ -77,9 +68,9 @@ final class ReviewsStorage {
         ReviewManager.getReviewsBySearch(with: query!, offset: searchingOffset) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .failure(let error):
+            case .failure(_):
                 DispatchQueue.main.async {
-                    self.delegate?.onFetchFailed(with: error.localizedDescription)
+                    self.delegate?.onFetchFailed(with:  "К сожалению, по вашему запросу ничего не найдено...")
                 }
             case .success(let reviewData):
                 DispatchQueue.main.async {
@@ -92,7 +83,7 @@ final class ReviewsStorage {
                     }
                     self.searchedReviews.append(contentsOf: reviewData.results!)
                     if self.isSearching, self.hasSearching {
-                        let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                     } else {
                         self.isSearching = true
@@ -108,7 +99,7 @@ final class ReviewsStorage {
         }
     }
     
-    func freeModel() {
+    func prepareModelForRefresh() {
         searchingOffset = 0
         searchHasMore = true
         hasSearching = false
@@ -137,11 +128,30 @@ final class ReviewsStorage {
         if filteredByDate.count > 0 {
                 delegate?.onFetchCompleted(with: nil)
         } else {
-            freeModel()
+            prepareModelForRefresh()
             self.delegate?.onFetchCompleted(with: nil)
         }
     }
     
+    func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath] {
+        if isSearching {
+            let startIndex = searchedReviews.count - newReviews.count
+            let endIndex = startIndex + newReviews.count
+            return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+        } else {
+            let startIndex = reviews.count - newReviews.count
+            let endIndex = startIndex + newReviews.count
+            return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+        }
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        if isSearching {
+            return indexPath.row >= searchedReviews.count - 1
+        } else {
+            return indexPath.row >= reviews.count - 1
+        }
+    }
     
 }
 

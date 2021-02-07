@@ -9,7 +9,7 @@ import Foundation
 
 struct ReviewManager {
     
-    static func getReviewsByOffset(offset: Int, completion: @escaping (Result<ReviewInfo, Error>) -> Void) {
+    static func getReviewsByOffset(offset: Int, completion: @escaping (Result<ReviewInfo, NetworkHandlerError>) -> Void) {
         NetworkService.shared.performRequestByURL(
             url: APIConstants.reviews + "&offset=" + String(offset)) {
             switch $0 {

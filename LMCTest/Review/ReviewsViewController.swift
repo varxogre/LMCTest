@@ -41,25 +41,32 @@ class ReviewsViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         tabBarController?.tabBar.isHidden = true
+        setupTableView()
+        initModel()
         
+    }
+    
+    private func setupTableView() {
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "cell")
         tableView.addSubview(refreshControl)
         tableView.keyboardDismissMode = .onDrag
-        tableView.backgroundColor = .systemGray6        
+        tableView.backgroundColor = .systemGray6
+    }
+    
+    private func initModel() {
         model = ReviewsStorage()
         model.fetchReviews()
         model.delegate = self
-        
     }
     
     @objc func refresh(_ sender: AnyObject) {
         if model.isSearching {
             model.isSearching = false
-            model.freeModel()
+            model.prepareModelForRefresh()
             tableView.reloadData()
         }
         if model.isFiltering {
-            model.freeModel()
+            model.prepareModelForRefresh()
             tableView.reloadData()
             refreshControl.endRefreshing()
         } else {
@@ -96,7 +103,7 @@ extension ReviewsViewController: UISearchBarDelegate {
         if let query = searchBar.text, !query.isEmpty {
             activityIndicator.startAnimating()
             model.query = query
-            model.freeModel()
+            model.prepareModelForRefresh()
             model.searchReviews()
         }
         searchBar.resignFirstResponder()

@@ -27,8 +27,8 @@ class CriticCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupConstraints()
         contentView.backgroundColor = .white
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -39,7 +39,6 @@ class CriticCell: UICollectionViewCell {
         criticImage.image = nil
         criticNameLabel.text = nil
     }
-    
     
     private func setupConstraints() {
         criticImage.translatesAutoresizingMaskIntoConstraints = false

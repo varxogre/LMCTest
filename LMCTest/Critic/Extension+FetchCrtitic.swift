@@ -7,18 +7,18 @@
 
 import Foundation
 
-extension CriticsViewController: CriticsStorageUpdateProtocol {
+extension CriticsViewController: StorageUpdateProtocol {
     
-    func onFetchCompleted() {
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         activityIndicator.stopAnimating()
         collectionView.reloadData()
         refreshControl.endRefreshing()
     }
     
-    func onFetchFailed(with reason: String) {
+    func onFetchFailed(with reason: String?) {
         activityIndicator.stopAnimating()
-        print(reason)
-    }
-    
-    
+        if let reason = reason {
+            showAlert(with: reason)
+        }
+    }   
 }
