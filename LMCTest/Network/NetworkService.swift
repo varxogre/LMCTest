@@ -23,14 +23,13 @@ struct NetworkService {
     func performRequestByURL(url: String, completion: @escaping (Result<Data, NetworkHandlerError>) -> Void) {
         guard let url = URL(string: url) else {
             completion(.failure(.invalidURL))
-            
             return
         }
         let urlSession = URLSession.shared
         urlSession.dataTask(with: url) {
             switch $0 {
             case .success(let (response, data)):
-                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200 == statusCode else {
                     completion(.failure(.invalidResponse))
                     return
                 }

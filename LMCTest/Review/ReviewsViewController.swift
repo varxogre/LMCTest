@@ -36,6 +36,7 @@ class ReviewsViewController: UIViewController {
         return activity
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
@@ -54,8 +55,8 @@ class ReviewsViewController: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         if model.isSearching {
             model.isSearching = false
-            tableView.reloadData()
             model.freeModel()
+            tableView.reloadData()
         }
         if model.isFiltering {
             model.freeModel()
@@ -64,6 +65,16 @@ class ReviewsViewController: UIViewController {
         } else {
             model.fetchReviews()
         }
+    }
+    
+    func showAlert(with message: String) {
+        let alert = UIAlertController(
+            title: "Ooops.", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(
+            title: "Ok", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -86,7 +97,7 @@ extension ReviewsViewController: UISearchBarDelegate {
             activityIndicator.startAnimating()
             model.query = query
             model.freeModel()
-            self.model.searchReviews()
+            model.searchReviews()
         }
         searchBar.resignFirstResponder()
     }

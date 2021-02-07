@@ -45,7 +45,9 @@ extension ReviewsViewController: ReviewsStorageUpdateProtocol {
     
     func onFetchFailed(with reason: String?) {
         activityIndicator.stopAnimating()
-        //TO-DO alertController
+        if let reason = reason {
+        showAlert(with: reason)
+        }
     }
     
 }

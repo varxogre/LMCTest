@@ -49,24 +49,19 @@ final class ReviewsStorage {
             guard let self = self else { return }
             switch result {
             case .failure(let error):
-                DispatchQueue.main.async {
                     print(error.localizedDescription)
-                    self.delegate?.onFetchFailed(with: error.localizedDescription)
-                }
             case .success(let reviewData):
                 DispatchQueue.main.async {
                     guard reviewData.numResults > 0 else {
-                        self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
+                        self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
                         return
                     }
                     self.reviews.append(contentsOf: reviewData.results!)
                     if self.hasMore {
                         let indexPathsToReload = self.delegate?.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                        print("onFetchCompleted(with indexPath)")
                     } else {
                         self.delegate?.onFetchCompleted(with: nil)
-                        print("onFetchCompleted(withNil)")
                     }
                     if reviewData.hasMore {
                         self.offset += 20
@@ -118,23 +113,23 @@ final class ReviewsStorage {
         searchHasMore = true
         hasSearching = false
         isFiltering = false
-//        filteredByDate.removeAll()
     }
     
     func filterDates(by currentDate: String) {
         isFiltering = true
+        let currentFilter = isSearching ? searchedReviews : reviews
         guard currentDate <= today else {
             filteredByDate.removeAll()
             delegate?.onFetchCompleted(with: nil)
             return
         }
-        guard currentDate >= reviews.last!.publicationDate else {
+        guard currentDate >= currentFilter.last!.publicationDate else {
             filteredByDate.removeAll()
             delegate?.onFetchCompleted(with: nil)
             return
         }
         filteredByDate.removeAll()
-        for review in reviews {
+        for review in currentFilter {
             if review.publicationDate <= currentDate {
                 filteredByDate.append(review)
             }
