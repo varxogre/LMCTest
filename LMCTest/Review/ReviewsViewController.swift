@@ -55,16 +55,17 @@ class ReviewsViewController: UIViewController {
         if model.isSearching {
             model.isSearching = false
             tableView.reloadData()
-            freeModel()
+            model.freeModel()
         }
-        model.fetchReviews()
+        if model.isFiltering {
+            model.freeModel()
+            tableView.reloadData()
+            refreshControl.endRefreshing()
+        } else {
+            model.fetchReviews()
+        }
     }
     
-    func freeModel() {
-        model.hasSearching = false
-        model.searchingOffset = 0
-        model.searchHasMore = true
-    }
     
     @IBAction func segment(_ sender: customSegmentedControl) {
         tabBarController?.selectedIndex = sender.selectedSegmentIndex
@@ -72,7 +73,8 @@ class ReviewsViewController: UIViewController {
     }
     
     @IBAction func dateChanged(_ sender: UIDatePicker) {
-        print(sender.date)
+        activityIndicator.startAnimating()
+        model.filterDates(by: sender.date.customizeDate())
     }
     
 }
@@ -80,16 +82,17 @@ class ReviewsViewController: UIViewController {
 
 extension ReviewsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let query = searchBar.text {
+        if let query = searchBar.text, !query.isEmpty {
             activityIndicator.startAnimating()
             model.query = query
-            freeModel()
+            model.freeModel()
             self.model.searchReviews()
         }
         searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
 }

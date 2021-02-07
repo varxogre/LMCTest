@@ -43,9 +43,9 @@ extension ReviewsViewController: ReviewsStorageUpdateProtocol {
         tableView.endUpdates()
     }
     
-    func onFetchFailed(with reason: String) {
+    func onFetchFailed(with reason: String?) {
         activityIndicator.stopAnimating()
-        print(reason)
+        //TO-DO alertController
     }
     
 }

@@ -22,6 +22,9 @@ extension ReviewsViewController: UITableViewDataSourcePrefetching {
 
 extension ReviewsViewController: UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if model.isFiltering {
+            return model.filteredByDate.count
+        } else
         if model.isSearching {
             return model.searchedReviews.count
         } else {
@@ -34,6 +37,15 @@ extension ReviewsViewController: UITableViewDataSource, UITableViewDelegate  {
             let cell = UITableViewCell()
             return cell
         }
+        if model.isFiltering {
+            let source = model.filteredByDate[indexPath.row]
+            cell.configureCellWith(source.displayTitle, source.summaryShort, source.byline, source.dateUpdated)
+            if let imageStr = model.filteredByDate[indexPath.row].multimedia?.src {
+                cell.mainImage.loadImageUsingCache(withUrl: imageStr)
+            } else {
+                cell.mainImage.image = UIImage(systemName: "film")
+            }
+        } else
         if model.isSearching {
             let source = model.searchedReviews[indexPath.row]
             cell.configureCellWith(source.displayTitle, source.summaryShort, source.byline, source.dateUpdated)

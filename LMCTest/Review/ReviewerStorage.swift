@@ -10,7 +10,7 @@ import Foundation
 protocol ReviewsStorageUpdateProtocol: class {
     func calculateIndexPathsToReload(from newReviews: [Review]) -> [IndexPath]
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-    func onFetchFailed(with reason: String)
+    func onFetchFailed(with reason: String?)
 }
 
 
@@ -22,11 +22,26 @@ final class ReviewsStorage {
     var searchingOffset = 0
     var hasMore = true
     var searchHasMore = true
-    var isSearching = false
-    var hasSearching = false
+    var isSearching = false {
+        didSet {
+            print("isSearching:\(isSearching)")
+        }
+    }
+    var hasSearching = false {
+        didSet {
+            print("hasSearching: \(hasSearching)")
+        }
+    }
+    var isFiltering = false {
+        didSet {
+            print("isFiltering:\(isFiltering)")
+        }
+    }
+    let today: String = Date().customizeDate()
     var query: String?
-    var reviews: [Review] = [] 
+    var reviews: [Review] = []
     var searchedReviews: [Review] = []
+    var filteredByDate: [Review] = []
     
     func fetchReviews() {
         guard hasMore else { return }
@@ -95,6 +110,40 @@ final class ReviewsStorage {
                     self.searchHasMore = reviewData.hasMore
                 }
             }
+        }
+    }
+    
+    func freeModel() {
+        searchingOffset = 0
+        searchHasMore = true
+        hasSearching = false
+        isFiltering = false
+//        filteredByDate.removeAll()
+    }
+    
+    func filterDates(by currentDate: String) {
+        isFiltering = true
+        guard currentDate <= today else {
+            filteredByDate.removeAll()
+            delegate?.onFetchCompleted(with: nil)
+            return
+        }
+        guard currentDate >= reviews.last!.publicationDate else {
+            filteredByDate.removeAll()
+            delegate?.onFetchCompleted(with: nil)
+            return
+        }
+        filteredByDate.removeAll()
+        for review in reviews {
+            if review.publicationDate <= currentDate {
+                filteredByDate.append(review)
+            }
+        }
+        if filteredByDate.count > 0 {
+                delegate?.onFetchCompleted(with: nil)
+        } else {
+            freeModel()
+            self.delegate?.onFetchCompleted(with: nil)
         }
     }
     

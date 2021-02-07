@@ -29,3 +29,11 @@ extension String {
             .filter{ !$0.isEmpty }.joined()
     }
 }
+
+extension Date {
+    func customizeDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: self)
+    }
+}
