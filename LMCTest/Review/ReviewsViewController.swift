@@ -41,11 +41,10 @@ class ReviewsViewController: UIViewController {
         activityIndicator.startAnimating()
         tabBarController?.tabBar.isHidden = true
         
-        tableView.backgroundColor = .systemGray6
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "cell")
         tableView.addSubview(refreshControl)
         tableView.keyboardDismissMode = .onDrag
-        
+        tableView.backgroundColor = .systemGray6        
         model = ReviewsStorage()
         model.fetchReviews()
         model.delegate = self

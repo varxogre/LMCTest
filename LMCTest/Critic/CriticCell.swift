@@ -12,6 +12,7 @@ class CriticCell: UICollectionViewCell {
     lazy var criticImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
+        contentView.addSubview(image)
         return image
     }()
     
@@ -19,20 +20,13 @@ class CriticCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         label.textAlignment = .center
+        contentView.addSubview(label)
         return label
     }()
     
-    lazy var mainStack: UIStackView = {
-        let stack = UIStackView()
-        stack.distribution = .fill
-        stack.axis = .vertical
-        stack.spacing = 4
-        return stack
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        createCell()
         setupConstraints()
         contentView.backgroundColor = .white
     }
@@ -46,24 +40,26 @@ class CriticCell: UICollectionViewCell {
         criticNameLabel.text = nil
     }
     
-    override func layoutMarginsDidChange() {
-        setupConstraints()
-    }
-    
-    private func createCell() {
-        mainStack.addArrangedSubview(criticImage)
-        mainStack.addArrangedSubview(criticNameLabel)
-        contentView.addSubview(mainStack)
-    }
     
     private func setupConstraints() {
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        criticImage.translatesAutoresizingMaskIntoConstraints = false
+        criticNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            
+            criticImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            criticImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            criticImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            criticImage.bottomAnchor.constraint(equalTo: criticNameLabel.topAnchor, constant: -8),
+            criticNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            criticNameLabel.centerXAnchor.constraint(equalTo: criticImage.centerXAnchor)
         ])
+        criticImage.setContentHuggingPriority(UILayoutPriority(rawValue: 248), for: .horizontal)
+        criticImage.setContentHuggingPriority(UILayoutPriority(rawValue: 248), for: .vertical)
+        criticImage.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        criticImage.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        criticNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        criticNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        criticNameLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .vertical)
+        criticNameLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
+        
     }
 }

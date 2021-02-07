@@ -47,10 +47,6 @@ class ReviewCell: UITableViewCell {
         mainImage.image = nil
     }
     
-    override func layoutSubviews() {
-        setupConstraints()
-    }
-    
     private func setupCell() {
         
         reviewTitleLabel.font = UIFont.boldSystemFont(ofSize: 22)

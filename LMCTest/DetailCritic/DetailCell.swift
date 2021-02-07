@@ -57,25 +57,24 @@ class DetailCell: UITableViewCell {
         return stack
     }()
     
-    lazy var bioStack: UIStackView = {
+    lazy var topStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [criticImage, textStack])
         stack.axis = .horizontal
         stack.alignment = .bottom
         stack.distribution = .fillEqually
-        stack.spacing = 8
-        return stack
-    }()
-    
-    lazy var mainStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [bioStack, criticBioLabel])
-        stack.axis = .vertical
         stack.spacing = 16
         return stack
     }()
     
-    override func layoutSubviews() {
-        setupConstraints()
-    }
+    lazy var mainStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [topStack, criticBioLabel])
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.spacing = 16
+        return stack
+    }()
+    
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -96,10 +95,10 @@ class DetailCell: UITableViewCell {
     private func setupConstraints() {
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            criticImage.heightAnchor.constraint(equalTo: criticImage.widthAnchor, multiplier: 1),
+            criticImage.heightAnchor.constraint(equalTo: criticImage.widthAnchor),
             textStack.heightAnchor.constraint(equalTo: criticImage.heightAnchor, multiplier: 0.7),
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             

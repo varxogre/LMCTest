@@ -38,6 +38,7 @@ class DetailCriticController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
+        
         tableView.backgroundColor = .systemGray6
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "reviewCell")
         tableView.register(DetailCell.self, forCellReuseIdentifier: "detailCell")
