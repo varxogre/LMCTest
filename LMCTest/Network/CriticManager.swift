@@ -26,7 +26,7 @@ struct CriticManager {
     static func getCritic(with name: String,
                           completion: @escaping (Result<CriticsInfo, Error>) -> Void) {
     NetworkService.shared.performRequestByURL(
-        url: baseURL + "critics/" + name + ".json?" + apiKey) {
+        url: APIConstants.baseURL + "critics/" + name + ".json?" + APIConstants.apiKey) {
         switch $0 {
         case .failure(let error):
             print(error.localizedDescription)

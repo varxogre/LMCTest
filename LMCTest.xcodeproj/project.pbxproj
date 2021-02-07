@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		872D46A125CA1C4700446CC7 /* customSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D46A025CA1C4700446CC7 /* customSegmentedControl.swift */; };
 		872D46A425CA1E8800446CC7 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D46A325CA1E8800446CC7 /* ReviewCell.swift */; };
 		87875FE925CDD1EB002FEEE0 /* DetailCriticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87875FE825CDD1EB002FEEE0 /* DetailCriticController.swift */; };
 		87875FEF25CDDE91002FEEE0 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87875FEE25CDDE91002FEEE0 /* DetailCell.swift */; };
@@ -24,11 +23,10 @@
 		8791F47525C89762006099D2 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F47425C89762006099D2 /* APIConstants.swift */; };
 		8791F47B25C8AF98006099D2 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F47A25C8AF98006099D2 /* ReviewManager.swift */; };
 		8791F48425C8D313006099D2 /* CriticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F48325C8D313006099D2 /* CriticManager.swift */; };
-		8791F48A25C8E716006099D2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F48925C8E716006099D2 /* MainViewController.swift */; };
 		8791F48D25C8E767006099D2 /* CriticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791F48C25C8E767006099D2 /* CriticsViewController.swift */; };
 		87AAB05F25CB156200C0DA28 /* ReviewerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB05E25CB156200C0DA28 /* ReviewerStorage.swift */; };
 		87AAB06225CB38D600C0DA28 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */; };
-		87AAB06525CB42C200C0DA28 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */; };
+		87AAB06525CB42C200C0DA28 /* Extension+String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06425CB42C200C0DA28 /* Extension+String+Date.swift */; };
 		87AAB06825CB9E4900C0DA28 /* Extension+FetchReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06725CB9E4900C0DA28 /* Extension+FetchReview.swift */; };
 		87AAB06B25CB9EF300C0DA28 /* Extension+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB06A25CB9EF300C0DA28 /* Extension+TableView.swift */; };
 		87BDF7A725CC997C0029853F /* CriticsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BDF7A625CC997C0029853F /* CriticsStorage.swift */; };
@@ -38,7 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		872D46A025CA1C4700446CC7 /* customSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customSegmentedControl.swift; sourceTree = "<group>"; };
 		872D46A325CA1E8800446CC7 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		87875FE825CDD1EB002FEEE0 /* DetailCriticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCriticController.swift; sourceTree = "<group>"; };
 		87875FEE25CDDE91002FEEE0 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -57,11 +54,10 @@
 		8791F47425C89762006099D2 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		8791F47A25C8AF98006099D2 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		8791F48325C8D313006099D2 /* CriticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticManager.swift; sourceTree = "<group>"; };
-		8791F48925C8E716006099D2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8791F48C25C8E767006099D2 /* CriticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsViewController.swift; sourceTree = "<group>"; };
 		87AAB05E25CB156200C0DA28 /* ReviewerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerStorage.swift; sourceTree = "<group>"; };
 		87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
-		87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
+		87AAB06425CB42C200C0DA28 /* Extension+String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String+Date.swift"; sourceTree = "<group>"; };
 		87AAB06725CB9E4900C0DA28 /* Extension+FetchReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+FetchReview.swift"; sourceTree = "<group>"; };
 		87AAB06A25CB9EF300C0DA28 /* Extension+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+TableView.swift"; sourceTree = "<group>"; };
 		87BDF7A625CC997C0029853F /* CriticsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsStorage.swift; sourceTree = "<group>"; };
@@ -108,9 +104,9 @@
 		872D468F25C9EDBC00446CC7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				872D469625C9EE7800446CC7 /* Contstants */,
 				8791F45925C84920006099D2 /* AppDelegate.swift */,
 				8791F45B25C84920006099D2 /* SceneDelegate.swift */,
+				872D469625C9EE7800446CC7 /* Contstants */,
 				872D469025C9EDE800446CC7 /* View */,
 			);
 			path = Application;
@@ -121,9 +117,6 @@
 			children = (
 				8791F46425C84922006099D2 /* LaunchScreen.storyboard */,
 				8791F45F25C84920006099D2 /* Main.storyboard */,
-				872D46A025CA1C4700446CC7 /* customSegmentedControl.swift */,
-				8791F48925C8E716006099D2 /* MainViewController.swift */,
-				87AAB06425CB42C200C0DA28 /* DateFormatterExtension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,6 +127,15 @@
 				8791F47425C89762006099D2 /* APIConstants.swift */,
 			);
 			path = Contstants;
+			sourceTree = "<group>";
+		};
+		8776B7B425D0901B00D6D34E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */,
+				87AAB06425CB42C200C0DA28 /* Extension+String+Date.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		87875FEB25CDD205002FEEE0 /* DetailCritic */ = {
@@ -172,6 +174,7 @@
 				872D468E25C9ED9B00446CC7 /* Critic */,
 				87875FEB25CDD205002FEEE0 /* DetailCritic */,
 				8791F47225C880F2006099D2 /* Network */,
+				8776B7B425D0901B00D6D34E /* Helpers */,
 				8791F46225C84922006099D2 /* Assets.xcassets */,
 				8791F46725C84922006099D2 /* Info.plist */,
 			);
@@ -184,7 +187,6 @@
 				8791F46F25C880ED006099D2 /* NetworkService.swift */,
 				8791F47A25C8AF98006099D2 /* ReviewManager.swift */,
 				8791F48325C8D313006099D2 /* CriticManager.swift */,
-				87AAB06125CB38D600C0DA28 /* Extension+UIImage.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -263,11 +265,10 @@
 				87AAB06825CB9E4900C0DA28 /* Extension+FetchReview.swift in Sources */,
 				87AAB06225CB38D600C0DA28 /* Extension+UIImage.swift in Sources */,
 				8791F45E25C84920006099D2 /* ReviewsViewController.swift in Sources */,
-				87AAB06525CB42C200C0DA28 /* DateFormatterExtension.swift in Sources */,
+				87AAB06525CB42C200C0DA28 /* Extension+String+Date.swift in Sources */,
 				87875FF225CDF2BC002FEEE0 /* DetailStorage.swift in Sources */,
 				87AAB06B25CB9EF300C0DA28 /* Extension+TableView.swift in Sources */,
 				87BDF7B025CCA6030029853F /* Extension+CollectionView.swift in Sources */,
-				872D46A125CA1C4700446CC7 /* customSegmentedControl.swift in Sources */,
 				8791F47525C89762006099D2 /* APIConstants.swift in Sources */,
 				8791F45A25C84920006099D2 /* AppDelegate.swift in Sources */,
 				8791F48D25C8E767006099D2 /* CriticsViewController.swift in Sources */,
@@ -280,7 +281,6 @@
 				87AAB05F25CB156200C0DA28 /* ReviewerStorage.swift in Sources */,
 				87875FE925CDD1EB002FEEE0 /* DetailCriticController.swift in Sources */,
 				87BDF7A725CC997C0029853F /* CriticsStorage.swift in Sources */,
-				8791F48A25C8E716006099D2 /* MainViewController.swift in Sources */,
 				87875FF925CE16B2002FEEE0 /* Extension+FetchR.swift in Sources */,
 				87BDF7B425CCB1CD0029853F /* Extension+FetchCrtitic.swift in Sources */,
 				87BDF7AA25CC9AFF0029853F /* CriticCell.swift in Sources */,

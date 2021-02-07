@@ -7,14 +7,15 @@
 
 import Foundation
 
-let apiKey = "api-key=trK8WVXQHLYqHovSH6Djd1WeQNwEXPpF"
-let baseURL = "https://api.nytimes.com/svc/movies/v2/"
 
-enum APIConstants: Hashable {
+enum APIConstants {
+    static let apiKey = "api-key=trK8WVXQHLYqHovSH6Djd1WeQNwEXPpF"
+    static let baseURL = "https://api.nytimes.com/svc/movies/v2/"
     static let reviews = baseURL + "reviews/all.json?" + apiKey
     static let reviewsQuery = baseURL + "reviews/search.json?" + apiKey
     static let critics = baseURL + "critics/all.json?" + apiKey
 }
+
 
 
 

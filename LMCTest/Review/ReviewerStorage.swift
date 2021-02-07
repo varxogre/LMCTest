@@ -22,7 +22,7 @@ final class ReviewsStorage {
     var hasMore = true
     var searchHasMore = true
     var isSearching = false
-    var hasSearching = false
+    var hasSearched = false
     var isFiltering = false
     let today: String = Date().customizeDate()
     var query: String?
@@ -78,16 +78,16 @@ final class ReviewsStorage {
                         self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
                         return
                     }
-                    if !self.hasSearching {
+                    if !self.hasSearched {
                         self.searchedReviews.removeAll()
                     }
                     self.searchedReviews.append(contentsOf: reviewData.results!)
-                    if self.isSearching, self.hasSearching {
+                    if self.isSearching, self.hasSearched {
                         let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                     } else {
                         self.isSearching = true
-                        self.hasSearching = true
+                        self.hasSearched = true
                         self.delegate?.onFetchCompleted(with: nil)
                     }
                     if reviewData.hasMore {
@@ -102,7 +102,7 @@ final class ReviewsStorage {
     func prepareModelForRefresh() {
         searchingOffset = 0
         searchHasMore = true
-        hasSearching = false
+        hasSearched = false
         isFiltering = false
     }
     

@@ -85,7 +85,7 @@ class ReviewsViewController: UIViewController {
     }
     
     
-    @IBAction func segment(_ sender: customSegmentedControl) {
+    @IBAction func segment(_ sender: UISegmentedControl) {
         tabBarController?.selectedIndex = sender.selectedSegmentIndex
         sender.selectedSegmentIndex = 0
     }

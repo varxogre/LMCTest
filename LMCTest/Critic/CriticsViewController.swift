@@ -11,7 +11,7 @@ class CriticsViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var segment: customSegmentedControl!
+    @IBOutlet var segment: UISegmentedControl!
         
     lazy var refreshControl: UIRefreshControl = {
         var refreshControl = UIRefreshControl()
@@ -33,7 +33,6 @@ class CriticsViewController: UIViewController {
         return activity
     }()
     
-    // - Mark constants
     let sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 50.0, right: 10.0)
     let itemsPerRow: CGFloat = 2
     
@@ -42,7 +41,6 @@ class CriticsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
-        segment.selectedSegmentIndex = 1
         setupCollection()
         initModel()
     }
@@ -85,7 +83,7 @@ class CriticsViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func segment(_ sender: customSegmentedControl) {
+    @IBAction func segment(_ sender: UISegmentedControl) {
         tabBarController?.selectedIndex = sender.selectedSegmentIndex
         sender.selectedSegmentIndex = 1
     }
