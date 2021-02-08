@@ -11,7 +11,9 @@ class CriticCell: UICollectionViewCell {
     
     lazy var criticImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 5
         contentView.addSubview(image)
         return image
     }()

@@ -23,7 +23,9 @@ class DetailCell: UITableViewCell {
 
     lazy var criticImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 5
+        image.contentMode = .scaleAspectFill
         return image
     }()
     

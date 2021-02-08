@@ -146,7 +146,9 @@ final class ReviewsStorage {
     }
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        if isSearching {
+        if isFiltering {
+            return indexPath.row >= filteredByDate.count - 1
+        } else if isSearching {
             return indexPath.row >= searchedReviews.count - 1
         } else {
             return indexPath.row >= reviews.count - 1

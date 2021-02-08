@@ -65,7 +65,7 @@ class ReviewCell: UITableViewCell {
     lazy var mainStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [mainImage, textStackView])
         stack.axis = .horizontal
-        stack.alignment = .top
+        stack.alignment = .center
         stack.spacing = 16
         return stack
     }()
@@ -102,9 +102,8 @@ class ReviewCell: UITableViewCell {
             mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             mainImage.widthAnchor.constraint(
                 equalToConstant: (contentView.frame.width / 2) - (contentView.frame.width * 0.15)),
-            textStackView.bottomAnchor.constraint(equalTo: mainImage.bottomAnchor)
+            textStackView.bottomAnchor.constraint(equalTo: mainImage.bottomAnchor),
         ])
-        
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
     }
 }

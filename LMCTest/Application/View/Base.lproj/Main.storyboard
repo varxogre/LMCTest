@@ -35,6 +35,7 @@
                                                     </label>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Vcx-y1-rlN">
                                                         <rect key="frame" x="0.0" y="66.333333333333329" width="396" height="44"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <segments>
                                                             <segment title="Reviewes"/>
                                                             <segment title="Critics"/>
@@ -282,7 +283,6 @@
                     <connections>
                         <outlet property="collectionView" destination="nkv-tr-b4e" id="61l-4b-qmf"/>
                         <outlet property="searchBar" destination="8mm-zj-baV" id="2Nr-Z4-sc1"/>
-                        <outlet property="segment" destination="c3k-yw-pDP" id="j36-0R-mGr"/>
                         <segue destination="Gce-a6-dv1" kind="show" identifier="show" id="MYj-mm-pZL"/>
                     </connections>
                 </viewController>

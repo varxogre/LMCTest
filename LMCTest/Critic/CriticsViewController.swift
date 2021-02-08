@@ -11,7 +11,6 @@ class CriticsViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var segment: UISegmentedControl!
         
     lazy var refreshControl: UIRefreshControl = {
         var refreshControl = UIRefreshControl()
