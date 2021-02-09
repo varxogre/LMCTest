@@ -102,7 +102,7 @@ extension ReviewsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let query = searchBar.text, !query.isEmpty {
             activityIndicator.startAnimating()
-            model.query = query
+            model.query = query.prepareWhitespace().capitalized
             model.prepareModelForRefresh()
             model.searchReviews()
         }

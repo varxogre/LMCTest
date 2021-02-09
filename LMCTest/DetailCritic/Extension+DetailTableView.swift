@@ -34,7 +34,7 @@ extension DetailCriticController: UITableViewDataSource, UITableViewDelegate  {
             
             guard let critic = critic else { return UITableViewCell()}
             cell.configureCellWith(critic.displayName, critic.status.rawValue,
-                                   critic.bio.prepareBio(), image: critic.multimedia?.resource.src)
+                                   critic.bio.removeHTMLTags(), image: critic.multimedia?.resource.src)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier:

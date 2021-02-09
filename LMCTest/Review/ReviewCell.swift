@@ -11,7 +11,7 @@ class ReviewCell: UITableViewCell {
     
     func configureCellWith(_ label: String, _ summary: String, _ byline: String, _ date: String) {
         reviewTitleLabel.text = label
-        summaryTextLabel.text = summary
+        summaryTextLabel.text = summary.removeHTMLTags()
         reviewerBylineLabel.text = byline.capitalized
         updatedDateLabel.text = date.customizeDate()
     }

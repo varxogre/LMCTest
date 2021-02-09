@@ -18,15 +18,20 @@ extension String {
         return self
     }
     
-     func prepareWhitespace() -> String {
-        return self.components(separatedBy: .whitespacesAndNewlines)
-            .filter { !$0.isEmpty }
-            .joined(separator: "%20")
+    func prepareWhitespace() -> String {
+        guard let formattedString =  self.addingPercentEncoding(
+                withAllowedCharacters: .urlUserAllowed)
+        else { return self }
+        return formattedString
     }
     
-    func prepareBio() -> String {
-        return self.components(separatedBy: "<br/><br/>")
-            .filter{ !$0.isEmpty }.joined()
+    func removeHTMLTags() -> String {
+        guard let data = self.data(using: .utf16) else { return self }
+        guard let attributedString = try? NSAttributedString(
+                data: data, options: [.documentType: NSAttributedString.DocumentType.html],
+                documentAttributes: nil)
+        else { return self }
+        return attributedString.string
     }
 }
 

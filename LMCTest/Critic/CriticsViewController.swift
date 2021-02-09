@@ -11,7 +11,7 @@ class CriticsViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var searchBar: UISearchBar!
-        
+    
     lazy var refreshControl: UIRefreshControl = {
         var refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
