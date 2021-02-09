@@ -18,7 +18,8 @@ final class DetailStorage {
     
     func fetchReviews() {
         guard hasMore else { return }
-        ReviewManager.getReviewsByReviewer(with: query!, offset: offset) { [weak self] (result) in
+        guard let query = query else { return }
+        ReviewManager.getReviewsByReviewer(with: query, offset: offset) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(let error):
@@ -31,12 +32,16 @@ final class DetailStorage {
                         self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
                         return
                     }
+                    guard let results = reviewData.results else {
+                        self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
+                        return
+                    }
                     if self.isFirstRequest {
                         self.reviews.removeAll()
                     }
-                    self.reviews.append(contentsOf: reviewData.results!) 
+                    self.reviews.append(contentsOf: results)
                     if self.hasMore, !self.isFirstRequest {
-                        let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: results)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                         print("onFetchCompleted(with indexPath)")
                     } else {

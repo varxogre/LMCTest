@@ -29,13 +29,17 @@ final class CriticsStorage {
                         self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
                         return
                     }
+                    guard let results = criticsInfo.results else {
+                        self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
+                        return
+                    }
                     if criticsInfo.numResults == self.critics.count {
                         self.critics.removeAll()
-                        self.critics.append(contentsOf: criticsInfo.results!)
+                        self.critics.append(contentsOf: results)
                         self.delegate?.onFetchCompleted(with: nil)
                         return
                     }
-                    self.critics.append(contentsOf: criticsInfo.results!)
+                    self.critics.append(contentsOf: results)
                     self.delegate?.onFetchCompleted(with: nil)
                 }
             }
@@ -56,8 +60,12 @@ final class CriticsStorage {
                         self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
                         return
                     }
+                    guard let results = criticsInfo.results else {
+                        self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
+                        return
+                    }
                     self.isSearching = true
-                    self.searchedCritic.append(contentsOf: criticsInfo.results!)
+                    self.searchedCritic.append(contentsOf: results)
                     self.delegate?.onFetchCompleted(with: nil)
                 }
             }

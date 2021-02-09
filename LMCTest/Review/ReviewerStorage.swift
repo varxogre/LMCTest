@@ -47,9 +47,13 @@ final class ReviewsStorage {
                         self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
                         return
                     }
-                    self.reviews.append(contentsOf: reviewData.results!)
+                    guard let results = reviewData.results else {
+                        self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
+                        return
+                    }
+                    self.reviews.append(contentsOf: results)
                     if self.hasMore {
-                        let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: results)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                     } else {
                         self.delegate?.onFetchCompleted(with: nil)
@@ -65,7 +69,8 @@ final class ReviewsStorage {
     
     func searchReviews() {
         guard searchHasMore else { return }
-        ReviewManager.getReviewsBySearch(with: query!, offset: searchingOffset) { [weak self] (result) in
+        guard let query = query else { return }
+        ReviewManager.getReviewsBySearch(with: query, offset: searchingOffset) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(_):
@@ -78,12 +83,16 @@ final class ReviewsStorage {
                         self.delegate?.onFetchFailed(with: "К сожалению, по вашему запросу ничего не найдено...")
                         return
                     }
+                    guard let results = reviewData.results else {
+                        self.delegate?.onFetchFailed(with: "Что-то пошло не так, попробуйте ещё раз.")
+                        return
+                    }
                     if !self.hasSearched {
                         self.searchedReviews.removeAll()
                     }
-                    self.searchedReviews.append(contentsOf: reviewData.results!)
+                    self.searchedReviews.append(contentsOf: results)
                     if self.isSearching, self.hasSearched {
-                        let indexPathsToReload = self.calculateIndexPathsToReload(from: reviewData.results!)
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: results)
                         self.delegate?.onFetchCompleted(with: indexPathsToReload)
                     } else {
                         self.isSearching = true
@@ -114,7 +123,8 @@ final class ReviewsStorage {
             delegate?.onFetchCompleted(with: nil)
             return
         }
-        guard currentDate >= currentFilter.last!.publicationDate else {
+        guard let lastElement = currentFilter.last else { return }
+        guard currentDate >= lastElement.publicationDate else {
             filteredByDate.removeAll()
             delegate?.onFetchCompleted(with: nil)
             return
